@@ -1,0 +1,3 @@
+import a urlconf from an app to core application
+
+review html raw form and apply a bootstrap style on create form (create the most simple boostsrap form with name, description and price fields, a submit button, make it centered)

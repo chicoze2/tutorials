@@ -9,6 +9,10 @@ def homepage_view(request, *args, **kwargs):
 
     print(request.user)
 
+    if(not request.user.is_authenticated):
+       request.user = "Anonymous. Please login!"
+       
+
     # return HttpResponse("<h1>Home page view!</h1>")
 
     return render(request, 'home.html', {request : request})

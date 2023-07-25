@@ -1,28 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% for i in object_list  %}
-  <div class="product{{i.id}}">
-    <!-- <a href="/product/{{i.id}}/">{{i.id}} - {{i.title}}</a> -->
+<div class="products-list">
+{% for i in object_list %}
 
-    <div class="col-md-4">
-      <div class="card">
-        <!-- Product Image -->
-        <!-- <img src="path/to/product-image.jpg" class="card-img-top" alt="Product Image"> -->
-        <div class="card-body">
-          <!-- Product Name -->
-          <h5 class="card-title">{{i.id}} - {{i.title}}</h5>
-          <!-- Product Price -->
-          <p class="card-text">{{i.price}}</p>
-          <!-- Add to Cart Button (optional) -->
-          <a href="/product/{{i.id}}/" class="btn btn-primary">Add to Cart</a>
-          <a href="/product/{{i.id}}/delete/" class="btn btn-danger">Remove</a>
+<div class="product-list-item product{{i.id}}">
+  <!-- <a href="/product/{{i.id}}/">{{i.id}} - {{i.title}}</a> -->
 
-        </div>
+  <div class="">
+    <div class="card">
+      <!-- Product Image -->
+      <!-- <img src="path/to/product-image.jpg" class="card-img-top" alt="Product Image"> -->
+      <div class="card-body">
+        <!-- Product Name -->
+        <h5 class="card-title">{{i.id}} - {{i.title}}</h5>
+        <!-- Product Description -->
+        <small class="card-text">{{i.description}}</small>
+        <!-- Product Price -->
+        <p class="card-price">R${{i.price}}</p>
+        <!-- Add to Cart Button (optional) -->
+        <a href="/product/{{i.id}}/" class="btn btn-primary">Details</a>
+        <a href="/product/{{i.id}}/delete/" class="btn btn-danger">Remove</a>
+
       </div>
     </div>
-
   </div>
 
+</div>
+
 {% endfor%}
-{% endblock %}  
+</div>
+{% endblock %}

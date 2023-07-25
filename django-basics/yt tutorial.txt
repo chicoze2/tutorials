@@ -1,3 +1,5 @@
 https://www.youtube.com/watch?v=F5mRW0jo-U4
 
 stop at 3:03
+
+import a urlconf from an app to core application - doing that?
