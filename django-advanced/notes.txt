@@ -1,0 +1,8 @@
+https://youtu.be/PtQiiknWUcI?t=6350
+
+USED COMMANDS:
+virtualenv app_env
+./app_env/Scripts/activate
+
+(app_env) django-admin startproject name
+ * python manage.py runserver
