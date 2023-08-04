@@ -1,4 +1,5 @@
 https://youtu.be/PtQiiknWUcI?t=6350
+4:22
 
 USED COMMANDS:
 virtualenv app_env
