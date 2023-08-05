@@ -1,14 +1,14 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.db.models import Q
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
 
-from .models import Room, Topic, Message
-from .forms import RoomForm, UserForm
+from .models import Room, Topic, Message, User
+from .forms import RoomForm, UserForm, CustomUserCreationForm
 
 def user_profile(request, pk):
   user = User.objects.get(id=pk)
@@ -46,12 +46,30 @@ def login_page(request):
   context = {'page': page}
   return render(request, 'login_register.html', context)
 
-def register_user(request):
-  page = 'register'
-  form = UserCreationForm()
+
+@login_required(login_url='login')
+def update_user(request):
+
+  user = request.user
+  form = UserForm(instance=user) 
 
   if request.method == 'POST':
-    form = UserCreationForm(request.POST)
+    form = UserForm(request.POST, request.FILES, instance=user)
+
+    if form.is_valid():
+      form.save()
+      print('>>>>>>>> form saved successfully')
+      return redirect('user_profile', user.id)
+
+  return render(request, 'update-user.html', {"form": form})
+
+
+def register_user(request):
+  page = 'register'
+  form = CustomUserCreationForm()
+
+  if request.method == 'POST':
+    form = CustomUserCreationForm(request.POST)
     if form.is_valid():
       user = form.save(commit=False)
 
@@ -174,22 +192,6 @@ def delete_message(request,  pk):
     return redirect('room', room_id)
   
   return render(request, 'base/delete.html', {'obj': message})
-
-@login_required(login_url='login')
-def update_user(request):
-
-  user = request.user
-  form = UserForm(instance=user) 
-
-  if request.method == 'POST':
-    form = UserForm(request.POST, instance=user)
-
-    if form.is_valid():
-      form.save()
-      print('>>>>>>>> form saved successfully')
-      return redirect('user_profile', user.id)
-
-  return render(request, 'update-user.html', {"form": form})
 
 def topics_page(request):
 
