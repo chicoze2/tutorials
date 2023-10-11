@@ -8,6 +8,8 @@ import { createCategory } from './useCases/categories/createCategories';
 import { listProducts } from './useCases/products/listProducts';
 import { createProduct } from './useCases/products/createProducts';
 import { listProductsByCategory } from './useCases/categories/listProductsByCategory';
+import { listOrders } from './useCases/orders/listOrders';
+import { createOrder } from './useCases/orders/createOrder';
 
 
 export const router = Router();
@@ -38,20 +40,18 @@ router.post('/products', upload.single('image'), createProduct);
 
 //Get products by category
 router.get('/categories/:categoryId/products', listProductsByCategory);
+
 //List orders
-router.get('/orders', (req, res) => {
-  res.send('arrived');
-});
+router.get('/orders', listOrders);
 
 //Create order
-router.post('/orders', (req, res) => {
-  res.send('arrived');
-});
+router.post('/orders', createOrder);
 
 //Change order status
 router.patch('/orders/:orderId', (req, res) => {
   res.send('arrived');
 });
+
 //Delete/cancel order
 router.delete('/orders/:orderId', (req, res) => {
   res.send('arrived');
