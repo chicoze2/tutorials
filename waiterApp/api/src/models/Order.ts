@@ -1,0 +1,37 @@
+import { model, Schema } from 'mongoose';
+
+
+export const Order = model('Order', new Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  table: {
+    type: String,
+    required: true
+  },
+  status: {
+    type: String,
+    enum: ['WAITING', 'IN_PRODUCTION', 'COMPLETED'],
+    default: 'WAITING'
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  },
+  products: { //produtos que estao no Order
+    required: true,
+    type: [{ //array de objetos tipo product
+      product: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref:'Product',
+      }
+    }],
+    quantity: {
+      type: Number,
+      default: 1
+    }
+  }
+
+}));
