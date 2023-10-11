@@ -7,6 +7,7 @@ import { listCategories } from './useCases/categories/listCategories';
 import { createCategory } from './useCases/categories/createCategories';
 import { listProducts } from './useCases/products/listProducts';
 import { createProduct } from './useCases/products/createProducts';
+import { listProductsByCategory } from './useCases/categories/listProductsByCategory';
 
 
 export const router = Router();
@@ -16,7 +17,10 @@ const upload = multer({
 
     destination(req, file, callback){
       callback(null,path.resolve(__dirname, '..', 'uploads'));
-    }
+    },
+    filename(req, file, callback) {
+      callback(null, `${Date.now()}-${file.originalname}`); //timestamp - nome
+    },
   })
 });
 
@@ -33,9 +37,7 @@ router.get('/products', listProducts);
 router.post('/products', upload.single('image'), createProduct);
 
 //Get products by category
-router.get('/categories/:categoryId/products', (req, res) => {
-  res.send('arrived');
-});
+router.get('/categories/:categoryId/products', listProductsByCategory);
 //List orders
 router.get('/orders', (req, res) => {
   res.send('arrived');
