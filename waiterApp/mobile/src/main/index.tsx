@@ -1,0 +1,41 @@
+import React from "react"
+
+import {
+	Container,
+	CategoriesContainer,
+	Footer,
+	MenuContainer,
+	FooterContainer
+
+} from "./styles"
+
+import { Header } from "../components/Header"
+import { Categories } from "../components/Categories"
+import { Menu } from "../components/Menu"
+import { Button } from "../components/Button"
+
+export function Main() {
+	return (
+		<>
+			<Container>
+
+				<Header />
+
+				<CategoriesContainer>
+					<Categories></Categories>
+				</CategoriesContainer>
+
+				<MenuContainer>
+					<Menu></Menu>
+				</MenuContainer>
+
+			</Container>
+
+			<Footer>
+				<FooterContainer>
+					<Button  onPress={() => alert("novo pedido")} label='Novo Pedido'/>
+				</FooterContainer>
+			</Footer>
+		</>
+	)
+}

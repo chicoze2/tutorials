@@ -14,7 +14,7 @@ export const Board = styled.div`
         font-size: 18px;
     }
 
-    header{
+    > header{ // somente headers filhos diretos de Board
         padding: 8px;
         font-size: 14px;
         display: flex;
